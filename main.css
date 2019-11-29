@@ -20,6 +20,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.modal-dialog {
+  max-width: 900px;
+  margin: 1.75rem auto;
+}
 body {
   overflow-x: hidden;
 }
@@ -65,4 +69,10 @@ body {
 .tpr {
   display: flex;
   overflow-y: hidden;
+}
+.img-modal {
+  width: 100px;
+  text-align: center;
+  margin: 1rem;
+  border-radius: 10px;
 }

@@ -15,7 +15,8 @@ Render.prototype.init = movie => {
       }
     },
     releaseDate: movie.release_date,
-    voteCount: movie.vote_average
+    voteCount: movie.vote_average,
+    movieId: movie.id
   };
 
   return this.movie;
@@ -31,7 +32,9 @@ Render.prototype.card = movie => {
         <h3 class="mb-0">${movie.title}</h3>
         <div class="mb-1 text-muted">${movie.releaseDate}</div>
         <p class="card-text mb-auto">${movie.overview.substring(0, 150)}</p>
-        <a href="#" class="stretched-link">Continue reading</a>
+        <button class='btn btn-primary modal-launch' value="${
+          movie.movieId
+        }">View More</button>
       </div>
       <div class="col-auto d-none d-lg-block clip">
         <img src="${movie.posterPath()}" class="img-fluid w-150">
@@ -56,5 +59,49 @@ Render.prototype.topCard = movie => {
           <small><i class="fas fa-star"></i>${movie.voteCount}</small>
         </div>
       </div>`;
+  return output;
+};
+
+Render.prototype.modalView = movie => {
+  console.log(movie);
+  var output = `<div class="card mb-3">
+  <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/${
+    movie.backdrop_path
+  }" alt="Card image cap">
+  <div class="card-body">
+    <div class='row'>
+    <div class='col-lg-6'>
+    <h5 class="card-title">${movie.title}</h5>
+    <p class="card-text">${movie.overview}</p>
+    <p class="card-text"><small class="text-muted">Release Date : <span class='text-success'>${
+      movie.release_date
+    }</span></small></p>
+    </div>
+    <div class='col-lg-6 text-center'>
+      <img src='https://image.tmdb.org/t/p/w500/${
+        movie.poster_path
+      }' class='img-fluid img-modal'>
+     <ul class='list-group'>
+     <li class='list-group-item'>Runtime : <span class='text-success'>${
+       movie.runtime
+     }</span></li>
+     <li class='list-group-item'>Popularity : <span class='text-success'>${
+       movie.popularity
+     }</span></li>
+     <li class='list-group-item'>Language : <span class='text-success'>${
+       movie.original_language
+     }</span></li>
+     <li class='list-group-item'>Tagline : <span class='text-success'>${
+       movie.tagline
+     }</span></li>
+     <li class='list-group-item'>Revenue : <span class='text-success'>${Math.round(
+       movie.revenue / 10000
+     )} Cr</span></li>
+     </ul>
+    </div>
+    </row>
+  </div>
+</div>
+`;
   return output;
 };
